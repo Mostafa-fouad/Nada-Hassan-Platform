@@ -1,27 +1,27 @@
 package com.example.nadahassanplatform.products.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import org.springframework.validation.annotation.Validated;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
-@RequiredArgsConstructor
-@Component
 @Builder
-@Validated
+@Getter
+@Setter
 public class CreateProductDto {
 
     @NotBlank
-    private final String description;
+    private String description;
 
     @NotNull
-    private final List<String> images;
+    private List<String> images;
 
     @NotNull
-    private final List<String> colors;
+    private List<String> colors;
 
 }
