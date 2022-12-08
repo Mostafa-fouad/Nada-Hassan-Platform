@@ -68,9 +68,7 @@ public class Product {
     @Column(name = UPDATED_DATE_COLUMN_NAME, nullable = false)
     private Instant updatedDate;
 
-    @ManyToOne
-    @JoinColumn(name = ORDER_ID_COLUMN_NAME, nullable=false)
-    private Order order;
+
 
 
 //    TODO categories should be updated upon nada's request, the below categories are just examples

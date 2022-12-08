@@ -49,11 +49,11 @@ public class Order {
     @Column(name = CUSTOMER_MOBILE_COLUMN_NAME, nullable = false)
     private String customerMobile;
 
-    @Type(type = JSON_B_TYPE)
-    @Column(name = ORDER_ITEMS_COLUMN_NAME, nullable = false)
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    private Set<Product> orderItems;
+//    @Type(type = JSON_B_TYPE)
+//    @Column(name = ORDER_ITEMS_COLUMN_NAME, nullable = false)
+//    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    private Set<Product> orderItems;
 
     @CreationTimestamp
     @Column(name = CREATION_DATE_COLUMN_NAME, nullable = false)

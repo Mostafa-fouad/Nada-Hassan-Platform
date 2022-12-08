@@ -27,4 +27,11 @@ public class ProductsServiceImpl implements ProductService {
                         () -> new NotFoundException (String.format("Product with id %s is not found", id)))
         );
     }
+
+    @Override
+    public void deleteProductById(UUID id) {
+        productRepository.deleteById(id);
+    }
+
+
 }
