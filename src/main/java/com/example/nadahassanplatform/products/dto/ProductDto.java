@@ -2,9 +2,7 @@ package com.example.nadahassanplatform.products.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,10 +13,11 @@ import java.util.UUID;
 public class ProductDto {
 
     private UUID id;
-    private String short_description;
+    private String shortDescription;
     private String description;
-    private String image;
-    private List<String> images;
+    private String primaryImage;
+    private String category;
+    private List<String> secondaryImages;
     private List<String> colors;
 
 }

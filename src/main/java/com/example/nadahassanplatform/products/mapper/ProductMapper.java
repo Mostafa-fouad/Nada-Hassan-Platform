@@ -5,28 +5,30 @@ import com.example.nadahassanplatform.products.dto.ProductDto;
 import com.example.nadahassanplatform.products.model.Product;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class ProductMapper {
 
     public ProductDto mapProductModelToProductDto(final Product product) {
 
-//        TODO update this return after database & entity class creation
         return ProductDto.builder()
                 .id(product.getId())
-                .description("asdasd")
-                .images(List.of())
-                .colors(List.of()).build();
+                .description(product.getDescription())
+                .shortDescription(product.getShortDescription())
+                .primaryImage(product.getPrimaryImage())
+                .secondaryImages(product.getSecondaryImages())
+                .colors(product.getColors())
+                .category(product.getProductCategory().getValue())
+                .build();
     }
 
-    public Product mapCreateProductDtoToProductModel(final CreateProductDto CreateProductDto)
+    public Product mapCreateProductDtoToProductModel(final CreateProductDto createProductDto)
     {
         return  Product.builder()
-                .shortDescription(CreateProductDto.getShort_description())
-                .description(CreateProductDto.getDescription())
-                .primaryImage(CreateProductDto.getImage())
-                .secondaryImages(CreateProductDto.getImages())
-                .colors(CreateProductDto.getColors()).build();
+                .shortDescription(createProductDto.getShortDescription())
+                .description(createProductDto.getDescription())
+                .primaryImage(createProductDto.getPrimaryImage())
+                .secondaryImages(createProductDto.getSecondaryImages())
+                .productCategory(Product.Category.valueOf(createProductDto.getCategory()))
+                .colors(createProductDto.getColors()).build();
     }
 }
