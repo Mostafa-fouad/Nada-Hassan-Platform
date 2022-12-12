@@ -11,4 +11,5 @@ public interface ProductService {
     ProductDto getProductById(UUID id);
 
     void addProduct(CreateProductDto createProductDto);
+    void deleteProductById(UUID id);
 }

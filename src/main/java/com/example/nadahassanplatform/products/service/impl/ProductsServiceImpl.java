@@ -36,4 +36,11 @@ public class ProductsServiceImpl implements ProductService {
         var createdProduct = productMapper.mapCreateProductDtoToProductModel(createProductDto);
         productRepository.save(createdProduct);
     }
+
+    @Override
+    public void deleteProductById(UUID id) {
+        productRepository.deleteById(id);
+    }
+
+
 }

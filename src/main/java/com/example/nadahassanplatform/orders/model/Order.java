@@ -1,7 +1,6 @@
 package com.example.nadahassanplatform.orders.model;
 
 import com.example.nadahassanplatform.products.model.Product;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

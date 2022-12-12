@@ -22,6 +22,8 @@ public class ProductsController {
     static final String PRODUCTS_ROOT_PATH = "/products";
     private static final String GET_PRODUCT_BY_ID_PATH = "/{id}";
     private static final String UPDATE_PRODUCT_DESCRIPTION_PATH = "/description";
+    private static final String DELETE_PRODUCT_BY_ID_PATH = "/{id}";
+
     private static final String ADD_PRODUCT = "/add";
     private final ProductService productService;
 
@@ -35,6 +37,12 @@ public class ProductsController {
     public ResponseEntity<ProductDto> getProductById(@PathVariable final UUID id) {
 
         return ResponseEntity.ok(productService.getProductById(id));
+    }
+
+    @DeleteMapping(path= DELETE_PRODUCT_BY_ID_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deleteProductById(@PathVariable UUID id){
+        productService.deleteProductById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping(path = ADD_PRODUCT, produces = MediaType.APPLICATION_JSON_VALUE)

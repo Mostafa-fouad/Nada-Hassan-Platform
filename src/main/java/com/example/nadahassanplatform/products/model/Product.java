@@ -74,6 +74,8 @@ public class Product {
     private Instant updatedDate;
 
 
+
+
 //    TODO categories should be updated upon nada's request, the below categories are just examples
     public enum Category {
         PULLOVER("PULLOVER"),
