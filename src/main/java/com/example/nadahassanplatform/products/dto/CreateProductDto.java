@@ -14,13 +14,13 @@ import java.util.List;
 @Getter
 @Setter
 public class CreateProductDto {
-
+    @NotBlank
+    private String short_description;
     @NotBlank
     private String description;
-
     @NotNull
+    private String image;
     private List<String> images;
-
     @NotNull
     private List<String> colors;
 
