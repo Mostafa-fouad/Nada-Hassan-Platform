@@ -41,7 +41,7 @@ public class Product {
     static final String TABLE_NAME = "product";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(name = DESCRIPTION_COLUMN_NAME, nullable = false)
@@ -81,7 +81,8 @@ public class Product {
         PULLOVER("PULLOVER"),
         JACKET("JACKET"),
         PANTS("PANTS"),
-        CHEMISE("CHEMISE");
+        CHEMISE("CHEMISE"),
+        OTHERS("OTHERS");
 
         private final String value;
 

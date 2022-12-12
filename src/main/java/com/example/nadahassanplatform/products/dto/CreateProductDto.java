@@ -3,7 +3,6 @@ package com.example.nadahassanplatform.products.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,13 +14,17 @@ import java.util.List;
 @Setter
 public class CreateProductDto {
     @NotBlank
-    private String short_description;
+    private String shortDescription;
     @NotBlank
     private String description;
     @NotNull
-    private String image;
-    private List<String> images;
+    private String primaryImage;
+
+    private List<String> secondaryImages;
     @NotNull
     private List<String> colors;
+    @NotNull
+    private String category;
+
 
 }
