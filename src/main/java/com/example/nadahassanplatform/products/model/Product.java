@@ -1,6 +1,5 @@
 package com.example.nadahassanplatform.products.model;
 
-import com.example.nadahassanplatform.orders.model.Order;
 import com.fasterxml.jackson.annotation.JsonValue;
 import javax.persistence.*;
 
@@ -34,7 +33,6 @@ public class Product {
     private static final String SECONDARY_IMAGES_COLUMN_NAME = "secondary_images";
     private static final String CREATION_DATE_COLUMN_NAME = "created_date";
     private static final String UPDATED_DATE_COLUMN_NAME = "updated_date";
-    private static final String ORDER_ID_COLUMN_NAME = "order_id";
 
     static final String JSON_B_TYPE = "jsonb";
     static final String TABLE_NAME = "product";
@@ -67,10 +65,6 @@ public class Product {
     @UpdateTimestamp
     @Column(name = UPDATED_DATE_COLUMN_NAME, nullable = false)
     private Instant updatedDate;
-
-    @ManyToOne
-    @JoinColumn(name = ORDER_ID_COLUMN_NAME, nullable=false)
-    private Order order;
 
 
 //    TODO categories should be updated upon nada's request, the below categories are just examples
