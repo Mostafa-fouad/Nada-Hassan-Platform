@@ -23,6 +23,7 @@ import static com.example.nadahassanplatform.products.model.Product.TABLE_NAME;
 @Setter
 @Getter
 @ToString
+@Builder
 @Table(name = TABLE_NAME)
 @TypeDef(name = Product.JSON_B_TYPE, typeClass = JsonBinaryType.class)
 public class Product {
@@ -35,6 +36,7 @@ public class Product {
     private static final String CREATION_DATE_COLUMN_NAME = "created_date";
     private static final String UPDATED_DATE_COLUMN_NAME = "updated_date";
     private static final String ORDER_ID_COLUMN_NAME = "order_id";
+    private static final String PRODUCT_COLORS_COLUMN_NAME = "colors";
 
     static final String JSON_B_TYPE = "jsonb";
     static final String TABLE_NAME = "product";
@@ -51,6 +53,9 @@ public class Product {
 
     @Column(name = PRIMARY_IMAGE_COLUMN_NAME, nullable = false)
     private String primaryImage;
+
+    @Column(name = PRODUCT_COLORS_COLUMN_NAME, nullable = false)
+    private List<String> colors;
 
     @Type(type = JSON_B_TYPE)
     @Column(name = SECONDARY_IMAGES_COLUMN_NAME, columnDefinition = JSON_B_TYPE)

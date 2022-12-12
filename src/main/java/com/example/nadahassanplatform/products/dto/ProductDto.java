@@ -15,7 +15,9 @@ import java.util.UUID;
 public class ProductDto {
 
     private UUID id;
+    private String short_description;
     private String description;
+    private String image;
     private List<String> images;
     private List<String> colors;
 
