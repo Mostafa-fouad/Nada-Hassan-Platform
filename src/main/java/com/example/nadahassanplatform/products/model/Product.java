@@ -1,6 +1,5 @@
 package com.example.nadahassanplatform.products.model;
 
-import com.example.nadahassanplatform.orders.model.Order;
 import com.fasterxml.jackson.annotation.JsonValue;
 import javax.persistence.*;
 
@@ -33,10 +32,10 @@ public class Product {
     private static final String CATEGORY_COLUMN_NAME = "product_category";
     private static final String PRIMARY_IMAGE_COLUMN_NAME = "primary_image";
     private static final String SECONDARY_IMAGES_COLUMN_NAME = "secondary_images";
+    private static final String COLORS_COLUMN_NAME = "colors";
     private static final String CREATION_DATE_COLUMN_NAME = "created_date";
     private static final String UPDATED_DATE_COLUMN_NAME = "updated_date";
     private static final String ORDER_ID_COLUMN_NAME = "order_id";
-    private static final String PRODUCT_COLORS_COLUMN_NAME = "colors";
 
     static final String JSON_B_TYPE = "jsonb";
     static final String TABLE_NAME = "product";
@@ -54,12 +53,13 @@ public class Product {
     @Column(name = PRIMARY_IMAGE_COLUMN_NAME, nullable = false)
     private String primaryImage;
 
-    @Column(name = PRODUCT_COLORS_COLUMN_NAME, nullable = false)
-    private List<String> colors;
-
     @Type(type = JSON_B_TYPE)
     @Column(name = SECONDARY_IMAGES_COLUMN_NAME, columnDefinition = JSON_B_TYPE)
     private List<String> secondaryImages;
+
+    @Type(type = JSON_B_TYPE)
+    @Column(name = COLORS_COLUMN_NAME, columnDefinition = JSON_B_TYPE)
+    private List<String> colors;
 
     @Enumerated(EnumType.STRING)
     @Column(name = CATEGORY_COLUMN_NAME, nullable = false)
@@ -72,10 +72,6 @@ public class Product {
     @UpdateTimestamp
     @Column(name = UPDATED_DATE_COLUMN_NAME, nullable = false)
     private Instant updatedDate;
-
-    @ManyToOne
-    @JoinColumn(name = ORDER_ID_COLUMN_NAME, nullable=false)
-    private Order order;
 
 
 //    TODO categories should be updated upon nada's request, the below categories are just examples
