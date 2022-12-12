@@ -31,6 +31,7 @@ public class Product {
     private static final String CATEGORY_COLUMN_NAME = "product_category";
     private static final String PRIMARY_IMAGE_COLUMN_NAME = "primary_image";
     private static final String SECONDARY_IMAGES_COLUMN_NAME = "secondary_images";
+    private static final String COLORS_COLUMN_NAME = "colors";
     private static final String CREATION_DATE_COLUMN_NAME = "created_date";
     private static final String UPDATED_DATE_COLUMN_NAME = "updated_date";
 
@@ -53,6 +54,10 @@ public class Product {
     @Type(type = JSON_B_TYPE)
     @Column(name = SECONDARY_IMAGES_COLUMN_NAME, columnDefinition = JSON_B_TYPE)
     private List<String> secondaryImages;
+
+    @Type(type = JSON_B_TYPE)
+    @Column(name = COLORS_COLUMN_NAME, columnDefinition = JSON_B_TYPE)
+    private List<String> colors;
 
     @Enumerated(EnumType.STRING)
     @Column(name = CATEGORY_COLUMN_NAME, nullable = false)

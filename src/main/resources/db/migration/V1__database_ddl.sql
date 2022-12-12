@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS public.product
     product_category character varying(255) COLLATE pg_catalog."default",
     primary_image character varying(255) COLLATE pg_catalog."default",
     secondary_images jsonb default '{}'::jsonb,
+    colors jsonb default '{}'::jsonb,
     created_date timestamp without time zone,
     updated_date timestamp without time zone,
     CONSTRAINT product_pkey PRIMARY KEY (id)
