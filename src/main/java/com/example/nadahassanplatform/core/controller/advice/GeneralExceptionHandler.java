@@ -8,8 +8,6 @@ import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.data.mapping.MappingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -107,19 +105,6 @@ public class GeneralExceptionHandler {
         message.indexOf("Detail:") > 0 ? message.substring(message.indexOf("Detail:")) : message;
     return logAndRespond(message, ex);
   }
-
-  @ResponseStatus(HttpStatus.UNAUTHORIZED)
-  @ExceptionHandler(AuthenticationException.class)
-  public ApiErrorResponse authenticationError(AuthenticationException ex) {
-    return logAndRespond(ex.getMessage(), ex);
-  }
-
-  @ResponseStatus(HttpStatus.FORBIDDEN)
-  @ExceptionHandler(AccessDeniedException.class)
-  public ApiErrorResponse accessDenied(AccessDeniedException ex) {
-    return logAndRespond(ex.getMessage(), ex);
-  }
-
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   @ExceptionHandler(FileUploadException.class)
   public ApiErrorResponse handleException(FileUploadException ex) {
