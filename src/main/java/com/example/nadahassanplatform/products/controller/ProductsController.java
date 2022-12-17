@@ -9,7 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.UUID;
 
 import static com.example.nadahassanplatform.products.controller.ProductsController.PRODUCTS_ROOT_PATH;
@@ -27,6 +26,7 @@ public class ProductsController {
     private static final String ADD_PRODUCT_PATH = "/add";
     private final ProductService productService;
 
+    // TODO to be deleted before first phase deployment
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public String checkAppStatus() {
 
