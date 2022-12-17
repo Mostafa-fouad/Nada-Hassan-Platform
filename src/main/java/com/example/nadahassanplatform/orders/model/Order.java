@@ -19,6 +19,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @ToString
+@Builder
 @Table(name = Order.TABLE_NAME)
 @TypeDef(name = Order.JSON_B_TYPE, typeClass = JsonBinaryType.class)
 public class Order {
