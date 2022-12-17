@@ -9,8 +9,10 @@ import com.example.nadahassanplatform.products.repository.ProductRepository;
 import com.example.nadahassanplatform.products.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @CacheConfig(cacheNames = {"products-cache"})
@@ -43,4 +45,10 @@ public class ProductsServiceImpl implements ProductService {
     }
 
 
+
+    @Override
+    public List<Product> getAllProductsSortedByShortDescription()
+    {
+        return productRepository.findAll(Sort.by(Sort.Direction.ASC, "shortDescription"));
+    }
 }
