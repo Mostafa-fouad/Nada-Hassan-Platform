@@ -56,14 +56,14 @@ public class ProductsServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto updateProduct(final UpdateProductDto updateProductDto) {
+    public void updateProduct(final UpdateProductDto updateProductDto) {
 
         final Product product = productRepository.findById(updateProductDto.getId())
                 .orElseThrow(() -> new NotFoundException (String.format("Product with id %s not found", updateProductDto.getId())));
 
         updateProductFields(product, updateProductDto);
 
-        return productMapper.mapProductModelToProductDto(productRepository.save(product));
+        productMapper.mapProductModelToProductDto(productRepository.save(product));
     }
 
     private void updateProductFields(final Product product, final UpdateProductDto updateProductDto) {
