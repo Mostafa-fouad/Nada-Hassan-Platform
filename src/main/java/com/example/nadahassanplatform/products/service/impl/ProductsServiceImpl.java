@@ -3,26 +3,30 @@ package com.example.nadahassanplatform.products.service.impl;
 import com.example.nadahassanplatform.core.exception.NotFoundException;
 import com.example.nadahassanplatform.products.dto.CreateProductDto;
 import com.example.nadahassanplatform.products.dto.ProductDto;
+import com.example.nadahassanplatform.products.dto.ProductResponsePageDTO;
 import com.example.nadahassanplatform.products.dto.UpdateProductDto;
 import com.example.nadahassanplatform.products.mapper.ProductMapper;
 import com.example.nadahassanplatform.products.model.Product;
 import com.example.nadahassanplatform.products.repository.ProductRepository;
 import com.example.nadahassanplatform.products.service.ProductService;
+import com.example.nadahassanplatform.utils.PaginationUtils;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @CacheConfig(cacheNames = {"products-cache"})
 @Service
 @RequiredArgsConstructor
 public class ProductsServiceImpl implements ProductService {
 
+    private final ModelMapper modelMapper;
     private final ProductMapper productMapper;
     private final ProductRepository productRepository;
 
@@ -48,11 +52,16 @@ public class ProductsServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getAllProductsSortedByShortDescription()
-    {
-        return productRepository.findAll(Sort.by(Sort.Direction.ASC, "shortDescription")).stream()
-                .map(productMapper::mapProductModelToProductDto)
-                .collect(Collectors.toList());
+    public ProductResponsePageDTO getAllProductsPage(final Pageable pageable) {
+
+        final Page<Product> productPage = productRepository.findAll(pageable);
+
+        final List<ProductDto> productsResponse = productPage.getContent().stream()
+                .map(productMapper::mapProductModelToProductDto).toList();
+
+        return ProductResponsePageDTO.builder()
+                .page(PaginationUtils.buildPageDTO(modelMapper, productPage))
+                .content(productsResponse).build();
     }
 
     @Override
