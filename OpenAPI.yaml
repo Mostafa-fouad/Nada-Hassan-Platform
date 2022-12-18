@@ -174,27 +174,9 @@ paths:
             format: uuid
       responses:
         '200':
-          description: OK
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+          description: OK, product deleted successfully
         '404':
-          description: Not Found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '405':
-          description: Method Not Allowed
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '415':
-          description: Unsupported Media Type
+          description: Not Found, the product to be deleted is not exist
           content:
             '*/*':
               schema:
@@ -212,37 +194,13 @@ paths:
       operationId: getAll
       responses:
         '200':
-          description: OK
+          description: OK, all orders are fetched successfully
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Order'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '404':
-          description: Not Found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '405':
-          description: Method Not Allowed
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '415':
-          description: Unsupported Media Type
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
         '500':
           description: Internal Server Error
           content:
