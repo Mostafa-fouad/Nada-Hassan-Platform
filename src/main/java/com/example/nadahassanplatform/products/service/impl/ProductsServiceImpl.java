@@ -5,7 +5,6 @@ import com.example.nadahassanplatform.products.dto.CreateProductDto;
 import com.example.nadahassanplatform.products.dto.ProductDto;
 import com.example.nadahassanplatform.products.dto.UpdateProductDto;
 import com.example.nadahassanplatform.products.mapper.ProductMapper;
-import com.example.nadahassanplatform.products.model.Product;
 import com.example.nadahassanplatform.products.repository.ProductRepository;
 import com.example.nadahassanplatform.products.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @CacheConfig(cacheNames = {"products-cache"})
 @Service
@@ -47,6 +47,14 @@ public class ProductsServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductDto> getAllProductsSortedByShortDescription()
+    {
+        return productRepository.findAll(Sort.by(Sort.Direction.ASC, "shortDescription")).stream()
+                .map(productMapper::mapProductModelToProductDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public ProductDto updateProduct(final UpdateProductDto updateProductDto) {
 
         final Product product = productRepository.findById(updateProductDto.getId())
@@ -55,14 +63,6 @@ public class ProductsServiceImpl implements ProductService {
         updateProductFields(product, updateProductDto);
 
         return productMapper.mapProductModelToProductDto(productRepository.save(product));
-    }
-
-    @Override
-    public List<ProductDto> getAllProductsSortedByShortDescription()
-    {
-        return productRepository.findAll(Sort.by(Sort.Direction.ASC, "shortDescription")).stream()
-                .map(productMapper::mapProductModelToProductDto)
-                .collect(Collectors.toList());
     }
 
     private void updateProductFields(final Product product, final UpdateProductDto updateProductDto) {
