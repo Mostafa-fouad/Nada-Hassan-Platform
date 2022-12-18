@@ -21,13 +21,13 @@ public class ProductMapper {
                 .build();
     }
 
-    public Product mapCreateProductDtoToProductModel(final CreateProductDto createProductDto)
-    {
+    public Product mapCreateProductDtoToProductModel(final CreateProductDto createProductDto) {
         return  Product.builder()
                 .shortDescription(createProductDto.getShortDescription())
                 .description(createProductDto.getDescription())
                 .primaryImage(createProductDto.getPrimaryImage())
                 .secondaryImages(createProductDto.getSecondaryImages())
+                .price(createProductDto.getPrice())
                 .productCategory(Product.Category.valueOf(createProductDto.getCategory()))
                 .colors(createProductDto.getColors()).build();
     }

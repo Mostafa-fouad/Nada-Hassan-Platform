@@ -2,7 +2,7 @@ package com.example.nadahassanplatform.products.controller;
 
 import com.example.nadahassanplatform.products.dto.CreateProductDto;
 import com.example.nadahassanplatform.products.dto.ProductDto;
-import com.example.nadahassanplatform.products.model.Product;
+import com.example.nadahassanplatform.products.dto.UpdateProductDto;
 import com.example.nadahassanplatform.products.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,21 +31,28 @@ public class ProductsController {
     }
 
     @DeleteMapping(path= ID_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deleteProductById(@PathVariable UUID id){
+    public ResponseEntity<Void> deleteProductById(@PathVariable final UUID id){
         productService.deleteProductById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addProduct(@RequestBody CreateProductDto createProductDto)
+    public ResponseEntity<Void> addProduct(@RequestBody final CreateProductDto createProductDto)
     {
         productService.addProduct(createProductDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Product>> getAllProductsSortedByShortDescription()
-    {
+    public ResponseEntity<List<ProductDto>> getAllProductsSortedByShortDescription() {
         return new ResponseEntity<>(productService.getAllProductsSortedByShortDescription(), HttpStatus.OK);
+    }
+
+    @PatchMapping
+    public ResponseEntity<Void> editProduct(@RequestBody final UpdateProductDto updateProductDto) {
+
+        productService.updateProduct(updateProductDto);
+
+        return ResponseEntity.noContent().build();
     }
 }

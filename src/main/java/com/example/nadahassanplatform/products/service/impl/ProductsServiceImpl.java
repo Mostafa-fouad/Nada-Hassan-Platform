@@ -3,6 +3,7 @@ package com.example.nadahassanplatform.products.service.impl;
 import com.example.nadahassanplatform.core.exception.NotFoundException;
 import com.example.nadahassanplatform.products.dto.CreateProductDto;
 import com.example.nadahassanplatform.products.dto.ProductDto;
+import com.example.nadahassanplatform.products.dto.UpdateProductDto;
 import com.example.nadahassanplatform.products.mapper.ProductMapper;
 import com.example.nadahassanplatform.products.model.Product;
 import com.example.nadahassanplatform.products.repository.ProductRepository;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @CacheConfig(cacheNames = {"products-cache"})
@@ -33,22 +35,45 @@ public class ProductsServiceImpl implements ProductService {
     }
 
     @Override
-    public void addProduct(CreateProductDto createProductDto)
+    public void addProduct(final CreateProductDto createProductDto)
     {
         var createdProduct = productMapper.mapCreateProductDtoToProductModel(createProductDto);
         productRepository.save(createdProduct);
     }
 
     @Override
-    public void deleteProductById(UUID id) {
+    public void deleteProductById(final UUID id) {
         productRepository.deleteById(id);
     }
 
+    @Override
+    public ProductDto updateProduct(final UpdateProductDto updateProductDto) {
 
+        final Product product = productRepository.findById(updateProductDto.getId())
+                .orElseThrow(() -> new NotFoundException (String.format("Product with id %s not found", updateProductDto.getId())));
+
+        updateProductFields(product, updateProductDto);
+
+        return productMapper.mapProductModelToProductDto(productRepository.save(product));
+    }
 
     @Override
-    public List<Product> getAllProductsSortedByShortDescription()
+    public List<ProductDto> getAllProductsSortedByShortDescription()
     {
-        return productRepository.findAll(Sort.by(Sort.Direction.ASC, "shortDescription"));
+        return productRepository.findAll(Sort.by(Sort.Direction.ASC, "shortDescription")).stream()
+                .map(productMapper::mapProductModelToProductDto)
+                .collect(Collectors.toList());
+    }
+
+    private void updateProductFields(final Product product, final UpdateProductDto updateProductDto) {
+
+        if (Objects.nonNull(updateProductDto.getCategory()))
+            product.setProductCategory(Product.Category.valueOf(updateProductDto.getCategory()));
+        if (Objects.nonNull(updateProductDto.getDescription())) product.setDescription(updateProductDto.getDescription());
+        if (Objects.nonNull(updateProductDto.getShortDescription())) product.setShortDescription(updateProductDto.getShortDescription());
+        if (Objects.nonNull(updateProductDto.getColors())) product.setColors(updateProductDto.getColors());
+        if (Objects.nonNull(updateProductDto.getPrimaryImage())) product.setPrimaryImage(updateProductDto.getPrimaryImage());
+        if (Objects.nonNull(updateProductDto.getSecondaryImages())) product.setSecondaryImages(updateProductDto.getSecondaryImages());
+        if (Objects.nonNull(updateProductDto.getPrice())) product.setPrice(updateProductDto.getPrice());
     }
 }
