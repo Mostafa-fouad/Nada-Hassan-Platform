@@ -33,6 +33,7 @@ public class Product {
     private static final String PRIMARY_IMAGE_COLUMN_NAME = "primary_image";
     private static final String SECONDARY_IMAGES_COLUMN_NAME = "secondary_images";
     private static final String PRICE_COLUMN_NAME = "price";
+    private static final String QUANTITY_COLUMN_NAME = "quantity";
     private static final String COLORS_COLUMN_NAME = "colors";
     private static final String CREATION_DATE_COLUMN_NAME = "created_date";
     private static final String UPDATED_DATE_COLUMN_NAME = "updated_date";
@@ -56,6 +57,9 @@ public class Product {
 
     @Column(name = PRICE_COLUMN_NAME, nullable = false)
     private Double price;
+
+    @Column(name = QUANTITY_COLUMN_NAME, nullable = false)
+    private Integer quantity;
 
     @Type(type = JSON_B_TYPE)
     @Column(name = SECONDARY_IMAGES_COLUMN_NAME, columnDefinition = JSON_B_TYPE)
