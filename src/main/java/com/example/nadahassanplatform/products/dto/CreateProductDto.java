@@ -19,7 +19,8 @@ public class CreateProductDto {
     private String description;
     @NotNull
     private String primaryImage;
-
+    @NotNull
+    private Double price;
     private List<String> secondaryImages;
     @NotNull
     private List<String> colors;

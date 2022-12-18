@@ -2,7 +2,7 @@ package com.example.nadahassanplatform.products.service;
 
 import com.example.nadahassanplatform.products.dto.CreateProductDto;
 import com.example.nadahassanplatform.products.dto.ProductDto;
-import com.example.nadahassanplatform.products.model.Product;
+import com.example.nadahassanplatform.products.dto.UpdateProductDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,5 +14,8 @@ public interface ProductService {
     void addProduct(CreateProductDto createProductDto);
 
     List<ProductDto> getAllProductsSortedByShortDescription();
+
     void deleteProductById(UUID id);
+
+    void updateProduct(UpdateProductDto updateProductDto);
 }
