@@ -30,7 +30,7 @@ public class Order {
     private static final String UPDATED_DATE_COLUMN_NAME = "updated_date";
 
     static final String JSON_B_TYPE = "jsonb";
-    static final String TABLE_NAME = "order";
+    static final String TABLE_NAME = "orders";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

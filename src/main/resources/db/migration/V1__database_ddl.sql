@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS public.order
+CREATE TABLE IF NOT EXISTS public.orders
 (
     id uuid NOT NULL,
     order_submission_id character varying(255) COLLATE pg_catalog."default",
@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS public.product
     primary_image character varying(255) COLLATE pg_catalog."default",
     secondary_images jsonb default '{}'::jsonb,
     price NUMERIC(6, 2),
+    quantity int,
     colors jsonb default '{}'::jsonb,
     created_date timestamp without time zone,
     updated_date timestamp without time zone,

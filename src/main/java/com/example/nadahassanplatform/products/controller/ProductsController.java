@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 import static com.example.nadahassanplatform.products.controller.ProductsController.PRODUCTS_ROOT_PATH;
@@ -20,6 +19,7 @@ import static com.example.nadahassanplatform.products.controller.ProductsControl
 @RestController
 @RequestMapping(path = PRODUCTS_ROOT_PATH)
 @RequiredArgsConstructor
+@CrossOrigin
 public class ProductsController {
 
     private static final String ID_PATH = "/{id}";
