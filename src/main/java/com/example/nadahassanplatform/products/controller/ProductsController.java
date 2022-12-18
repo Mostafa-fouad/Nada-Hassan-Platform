@@ -51,8 +51,7 @@ public class ProductsController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Product>> getAllProductsSortedByShortDescription()
-    {
+    public ResponseEntity<List<ProductDto>> getAllProductsSortedByShortDescription() {
         return new ResponseEntity<>(productService.getAllProductsSortedByShortDescription(), HttpStatus.OK);
     }
 }
