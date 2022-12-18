@@ -39,31 +39,13 @@ paths:
             type: string
       responses:
         '200':
-          description: OK
+          description: Products pages are fetched successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductResponsePageDTO'
         '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '404':
-          description: Not Found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '405':
-          description: Method Not Allowed
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '415':
-          description: Unsupported Media Type
+          description: Bad Request whenthe sent parameters have invalid value 
           content:
             '*/*':
               schema:
@@ -128,28 +110,16 @@ paths:
               $ref: '#/components/schemas/UpdateProductDto'
         required: true
       responses:
-        '200':
-          description: OK
+        '201':
+          description: No content, product edited successfully
         '400':
-          description: Bad Request
+          description: Bad Request, when the sent object has invalid value
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
         '404':
-          description: Not Found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '405':
-          description: Method Not Allowed
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '415':
-          description: Unsupported Media Type
+          description: Not Found, when the product to be edited is not exist
           content:
             '*/*':
               schema:
@@ -174,31 +144,13 @@ paths:
             format: uuid
       responses:
         '200':
-          description: Get product by id
+          description: Product recieved successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductDto'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
         '404':
           description: Not found if the specified id not linked with any product
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '405':
-          description: Method Not Allowed
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '415':
-          description: Unsupported Media Type
           content:
             '*/*':
               schema:
