@@ -13,6 +13,6 @@ public interface ProductService {
 
     void addProduct(CreateProductDto createProductDto);
 
-    List<Product> getAllProductsSortedByShortDescription();
+    List<ProductDto> getAllProductsSortedByShortDescription();
     void deleteProductById(UUID id);
 }

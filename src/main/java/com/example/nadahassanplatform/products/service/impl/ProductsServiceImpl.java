@@ -4,7 +4,6 @@ import com.example.nadahassanplatform.core.exception.NotFoundException;
 import com.example.nadahassanplatform.products.dto.CreateProductDto;
 import com.example.nadahassanplatform.products.dto.ProductDto;
 import com.example.nadahassanplatform.products.mapper.ProductMapper;
-import com.example.nadahassanplatform.products.model.Product;
 import com.example.nadahassanplatform.products.repository.ProductRepository;
 import com.example.nadahassanplatform.products.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @CacheConfig(cacheNames = {"products-cache"})
 @Service
@@ -44,11 +44,11 @@ public class ProductsServiceImpl implements ProductService {
         productRepository.deleteById(id);
     }
 
-
-
     @Override
-    public List<Product> getAllProductsSortedByShortDescription()
+    public List<ProductDto> getAllProductsSortedByShortDescription()
     {
-        return productRepository.findAll(Sort.by(Sort.Direction.ASC, "shortDescription"));
+        return productRepository.findAll(Sort.by(Sort.Direction.ASC, "shortDescription")).stream()
+                .map(productMapper::mapProductModelToProductDto)
+                .collect(Collectors.toList());
     }
 }

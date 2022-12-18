@@ -24,6 +24,13 @@ public class ProductsController {
     private final ProductService productService;
     static final String PRODUCTS_ROOT_PATH = "/products";
 
+    // TODO to be deleted before first phase deployment
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public String checkAppStatus() {
+
+        return "App is up and running...";
+    }
+
     @GetMapping(path = ID_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductDto> getProductById(@PathVariable final UUID id) {
 
@@ -44,8 +51,7 @@ public class ProductsController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Product>> getAllProductsSortedByShortDescription()
-    {
+    public ResponseEntity<List<ProductDto>> getAllProductsSortedByShortDescription() {
         return new ResponseEntity<>(productService.getAllProductsSortedByShortDescription(), HttpStatus.OK);
     }
 }
