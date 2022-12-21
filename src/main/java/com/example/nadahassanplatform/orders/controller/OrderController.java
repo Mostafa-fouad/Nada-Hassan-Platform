@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static com.example.nadahassanplatform.orders.controller.OrderController.ORDERS_ROOT_PATH;
 
@@ -28,6 +30,12 @@ public class OrderController {
     public ResponseEntity<List<OrderDto>> getAllOrders() {
         final List<OrderDto> orders = orderService.getAllOrders();
         return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Optional<OrderDto>> getOrderByID(@PathVariable final UUID id) {
+        final Optional<OrderDto> order = orderService.getOrderByID(id);
+        return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
 }
