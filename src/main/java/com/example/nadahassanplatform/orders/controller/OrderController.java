@@ -1,7 +1,10 @@
 package com.example.nadahassanplatform.orders.controller;
 
+import com.example.nadahassanplatform.orders.dto.CreateOrderDto;
+import com.example.nadahassanplatform.orders.dto.CreateOrderDto;
 import com.example.nadahassanplatform.orders.dto.OrderDto;
 import com.example.nadahassanplatform.orders.service.OrderService;
+import com.example.nadahassanplatform.products.dto.CreateProductDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,5 +37,11 @@ public class OrderController {
     public ResponseEntity<OrderDto> getOrderByID(@PathVariable final UUID id) {
 
         return new ResponseEntity<>(orderService.getOrderByID(id), HttpStatus.OK);
+    }
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> addOrder(@RequestBody CreateOrderDto createOrderDto)
+    {
+        orderService.addOrder(createOrderDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     }

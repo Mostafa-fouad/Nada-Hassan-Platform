@@ -1,7 +1,9 @@
 package com.example.nadahassanplatform.orders.service.impl;
 
+import com.example.nadahassanplatform.orders.dto.CreateOrderDto;
 import com.example.nadahassanplatform.core.exception.NotFoundException;
 import com.example.nadahassanplatform.orders.dto.OrderDto;
+import com.example.nadahassanplatform.orders.mapper.OrderMapper;
 import com.example.nadahassanplatform.orders.model.Order;
 import com.example.nadahassanplatform.orders.repository.OrderRepository;
 import com.example.nadahassanplatform.orders.service.OrderService;
@@ -18,6 +20,7 @@ import java.util.UUID;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
+    private  final OrderMapper orderMapper;
     private final ModelMapper modelMapper;
 
     @Override
@@ -28,9 +31,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto getOrderByID(UUID orderID) {
-       final Order order = orderRepository.findById(orderID)
+        final Order order = orderRepository.findById(orderID)
                 .orElseThrow(() -> new NotFoundException(String.format("Order with id %s is not found", orderID)));
 
         return modelMapper.map(order, OrderDto.class);
+    }
+
+    @Override
+    public void addOrder(CreateOrderDto createOrderDto) {
+        orderRepository.save(orderMapper.mapCreateOrderDtoToOrderModel(createOrderDto));
     }
 }

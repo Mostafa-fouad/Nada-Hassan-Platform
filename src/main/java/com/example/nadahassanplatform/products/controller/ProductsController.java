@@ -4,6 +4,7 @@ import com.example.nadahassanplatform.products.dto.CreateProductDto;
 import com.example.nadahassanplatform.products.dto.ProductDto;
 import com.example.nadahassanplatform.products.dto.ProductResponsePageDTO;
 import com.example.nadahassanplatform.products.dto.UpdateProductDto;
+import com.example.nadahassanplatform.products.model.Product;
 import com.example.nadahassanplatform.products.service.ProductService;
 import com.example.nadahassanplatform.utils.PaginationUtils;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 import static com.example.nadahassanplatform.products.controller.ProductsController.PRODUCTS_ROOT_PATH;
@@ -33,7 +35,7 @@ public class ProductsController {
     }
 
     @DeleteMapping(path= ID_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deleteProductById(@PathVariable final UUID id){
+    public ResponseEntity<Void> deleteProductById(@PathVariable UUID id){
         productService.deleteProductById(id);
         return ResponseEntity.noContent().build();
     }

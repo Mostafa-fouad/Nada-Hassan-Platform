@@ -1,21 +1,32 @@
 package com.example.nadahassanplatform.orders.mapper;
 
-import com.example.nadahassanplatform.orders.dto.OrderDto;
+import com.example.nadahassanplatform.orders.dto.CreateOrderDto;
 import com.example.nadahassanplatform.orders.model.Order;
+import com.example.nadahassanplatform.products.model.Product;
+import com.example.nadahassanplatform.products.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
+@RequiredArgsConstructor
 public class OrderMapper {
+    private final ProductRepository productRepository;
 
-    public OrderDto mapOrderModelToOrderDto(final Order order) {
+    public Order mapCreateOrderDtoToOrderModel(CreateOrderDto createOrderDto) {
 
-        return OrderDto.builder()
-                .orderItems(order.getOrderItems())
-                .orderSubmissionId(order.getOrderSubmissionId())
-                .id(order.getId())
-                .address(order.getAddress())
-                .createdDate(order.getCreatedDate())
-                .customerMobile(order.getCustomerMobile())
-                .updatedDate(order.getUpdatedDate()).build();
+        final List<Product> orderProducts = productRepository.findAllById(createOrderDto.getOrderItems());
+
+        return Order.builder()
+                .address(createOrderDto.getAddress())
+                .orderSubmissionId(generateSubmissionCode())
+                .customerMobile(createOrderDto.getMobileNumber())
+                .orderItems(orderProducts).build();
+    }
+
+    private String generateSubmissionCode() {
+
+        return String.valueOf(System.currentTimeMillis());
     }
 }

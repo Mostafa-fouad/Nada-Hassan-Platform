@@ -19,6 +19,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @ToString
+@Builder
 @Table(name = Order.TABLE_NAME)
 @TypeDef(name = Order.JSON_B_TYPE, typeClass = JsonBinaryType.class)
 public class Order {
@@ -33,7 +34,7 @@ public class Order {
     static final String TABLE_NAME = "orders";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(name = ORDER_SUBMISSION_ID_COLUMN_NAME, nullable = false)
