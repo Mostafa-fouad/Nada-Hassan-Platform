@@ -1,6 +1,8 @@
 package com.example.nadahassanplatform.orders.service.impl;
 
+import com.example.nadahassanplatform.core.exception.NotFoundException;
 import com.example.nadahassanplatform.orders.dto.OrderDto;
+import com.example.nadahassanplatform.orders.model.Order;
 import com.example.nadahassanplatform.orders.repository.OrderRepository;
 import com.example.nadahassanplatform.orders.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +27,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<OrderDto> getOrderByID(UUID orderID)
-    {
-        return orderRepository.findById(orderID)
-                .map(order -> modelMapper.map(order, OrderDto.class));
+    public OrderDto getOrderByID(UUID orderID) {
+       final Order order = orderRepository.findById(orderID)
+                .orElseThrow(() -> new NotFoundException(String.format("Order with id %s is not found", orderID)));
+
+        return modelMapper.map(order, OrderDto.class);
     }
 }

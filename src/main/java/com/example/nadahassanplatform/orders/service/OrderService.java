@@ -10,5 +10,5 @@ import java.util.UUID;
 public interface OrderService {
     List<OrderDto> getAllOrders();
 
-    Optional<OrderDto> getOrderByID(UUID orderID);
+    OrderDto getOrderByID(UUID orderID);
 }

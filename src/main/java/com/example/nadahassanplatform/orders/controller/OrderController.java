@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +20,7 @@ import static com.example.nadahassanplatform.orders.controller.OrderController.O
 @CrossOrigin
 public class OrderController {
     static final String ORDERS_ROOT_PATH = "/orders";
+    private static final String ID_PATH = "/{id}";
 
     private final OrderService orderService;
 
@@ -32,10 +30,9 @@ public class OrderController {
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Optional<OrderDto>> getOrderByID(@PathVariable final UUID id) {
-        final Optional<OrderDto> order = orderService.getOrderByID(id);
-        return new ResponseEntity<>(order, HttpStatus.OK);
-    }
+    @GetMapping(path = ID_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<OrderDto> getOrderByID(@PathVariable final UUID id) {
 
-}
+        return new ResponseEntity<>(orderService.getOrderByID(id), HttpStatus.OK);
+    }
+    }
