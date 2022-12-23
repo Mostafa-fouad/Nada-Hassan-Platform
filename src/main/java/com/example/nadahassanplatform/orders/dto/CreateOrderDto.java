@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Setter
@@ -17,11 +18,9 @@ import java.util.List;
 public class CreateOrderDto {
 
     @NotNull
-    private String orderSubmissionId;
-    @NotNull
     private String address;
     @NotNull
-    private String customerMobile;
-    private List<Product> orderItems;
+    private String mobileNumber;
+    private List<UUID> orderItems;
 
 }

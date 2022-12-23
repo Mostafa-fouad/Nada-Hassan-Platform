@@ -38,11 +38,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAll() {
-        return orderRepository.findAll();
-    }
-
-    @Override
     public void addOrder(CreateOrderDto createOrderDto) {
         orderRepository.save(orderMapper.mapCreateOrderDtoToOrderModel(createOrderDto));
     }

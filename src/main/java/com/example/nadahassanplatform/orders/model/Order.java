@@ -34,7 +34,7 @@ public class Order {
     static final String TABLE_NAME = "orders";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(name = ORDER_SUBMISSION_ID_COLUMN_NAME, nullable = false)

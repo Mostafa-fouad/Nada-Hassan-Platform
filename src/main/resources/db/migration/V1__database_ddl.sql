@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS public.product
     secondary_images jsonb default null::jsonb,
     price NUMERIC(6, 2),
     quantity int,
-    colors jsonb ddefault null::jsonb,
+    colors jsonb default null::jsonb,
     created_date timestamp without time zone,
     updated_date timestamp without time zone,
     CONSTRAINT product_pkey PRIMARY KEY (id)

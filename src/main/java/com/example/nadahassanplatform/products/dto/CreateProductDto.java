@@ -21,11 +21,10 @@ public class CreateProductDto {
     private String primaryImage;
     @NotNull
     private Double price;
-    private List<String> secondaryImages;
-    @NotNull
-    private List<String> colors;
     @NotNull
     private String category;
-
+    @NotNull
+    private List<String> colors;
+    private List<String> secondaryImages;
 
 }
