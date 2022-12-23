@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS public.orders
     order_submission_id character varying(255) COLLATE pg_catalog."default",
     address character varying(255) COLLATE pg_catalog."default",
     customer_mobile character varying(12) COLLATE pg_catalog."default",
-    order_items jsonb default '{}'::jsonb,
+    order_items jsonb default null::jsonb,
     created_date timestamp without time zone,
     updated_date timestamp without time zone,
     CONSTRAINT order_pkey PRIMARY KEY (id)
@@ -19,10 +19,10 @@ CREATE TABLE IF NOT EXISTS public.product
     short_description character varying(255) COLLATE pg_catalog."default",
     product_category character varying(255) COLLATE pg_catalog."default",
     primary_image character varying(255) COLLATE pg_catalog."default",
-    secondary_images jsonb default '{}'::jsonb,
+    secondary_images jsonb default null::jsonb,
     price NUMERIC(6, 2),
     quantity int,
-    colors jsonb default '{}'::jsonb,
+    colors jsonb ddefault null::jsonb,
     created_date timestamp without time zone,
     updated_date timestamp without time zone,
     CONSTRAINT product_pkey PRIMARY KEY (id)
