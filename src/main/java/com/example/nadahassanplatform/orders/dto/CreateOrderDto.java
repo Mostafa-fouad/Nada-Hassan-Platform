@@ -1,6 +1,5 @@
 package com.example.nadahassanplatform.orders.dto;
 
-import com.example.nadahassanplatform.products.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +17,18 @@ import java.util.UUID;
 public class CreateOrderDto {
 
     @NotNull
-    private String address;
+    private String email;
     @NotNull
     private String mobileNumber;
+    @NotNull
+    private String firstName;
+    @NotNull
+    private String lastName;
+    @NotNull
+    private String city;
+    @NotNull
+    private String address;
+    @NotNull
     private List<UUID> orderItems;
 
 }
