@@ -1,6 +1,6 @@
 package com.example.nadahassanplatform.orders.model;
 
-import com.example.nadahassanplatform.products.model.Product;
+import com.example.nadahassanplatform.orders.util.OrderProduct;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,7 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Entity
@@ -47,7 +47,7 @@ public class Order {
     private String customerMobile;
 
     @Type(type = JSON_B_TYPE)
-    private List<Product> orderItems;
+    private Map<UUID, OrderProduct> orderItems;
 
     @CreationTimestamp
     @Column(name = CREATION_DATE_COLUMN_NAME, nullable = false)
