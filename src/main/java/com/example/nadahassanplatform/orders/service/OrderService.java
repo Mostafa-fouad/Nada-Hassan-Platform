@@ -11,6 +11,7 @@ public interface OrderService {
     List<OrderDto> getAllOrders();
 
     OrderDto getOrderByID(UUID orderID);
-
     void addOrder(CreateOrderDto createOrderDto);
+
+    void updateExistingOrder(OrderDto updatedOrder);
 }
