@@ -25,6 +25,8 @@ import static com.example.nadahassanplatform.products.controller.ProductsControl
 public class ProductsController {
 
     private static final String ID_PATH = "/{id}";
+    private static final String CATEGORY_ID_PATH = "/category/{id}";
+    private static final String CATEGORIES_PATH = "/categories";
     private final ProductService productService;
     static final String PRODUCTS_ROOT_PATH = "/products";
 
@@ -32,6 +34,18 @@ public class ProductsController {
     public ResponseEntity<ProductDto> getProductById(@PathVariable final UUID id) {
 
         return ResponseEntity.ok(productService.getProductById(id));
+    }
+
+    @GetMapping(path = CATEGORY_ID_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ProductDto>> getProductsByCategoryId(@PathVariable final Integer id) {
+
+        return ResponseEntity.ok(productService.getProductsByCategory(id));
+    }
+
+    @GetMapping(path = CATEGORIES_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Product.Category>> getAllProductsCategories() {
+
+        return ResponseEntity.ok(productService.getAllProductsCategories());
     }
 
     @DeleteMapping(path= ID_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
