@@ -83,10 +83,13 @@ public class Product {
 
 //    TODO categories should be updated upon nada's request, the below categories are just examples
     public enum Category {
-        PULLOVER("PULLOVER"),
-        JACKET("JACKET"),
+        SKIRTS("SKIRTS"),
         PANTS("PANTS"),
-        CHEMISE("CHEMISE"),
+        DRESSES("DRESSES"),
+        JACKETS("JACKETS"),
+        SWEATSHIRTS("SWEATSHIRTS"),
+        TOPS("TOPS"),
+        SETS("SETS"),
         OTHERS("OTHERS");
 
         private final String value;

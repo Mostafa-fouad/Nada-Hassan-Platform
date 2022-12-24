@@ -22,7 +22,7 @@ public class CreateProductDto {
     @NotNull
     private Double price;
     @NotNull
-    private String category;
+    private Integer categoryCode;
     @NotNull
     private List<String> colors;
     private List<String> secondaryImages;
