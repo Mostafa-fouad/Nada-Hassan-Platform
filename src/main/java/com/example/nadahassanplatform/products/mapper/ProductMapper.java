@@ -3,6 +3,7 @@ package com.example.nadahassanplatform.products.mapper;
 import com.example.nadahassanplatform.products.dto.CreateProductDto;
 import com.example.nadahassanplatform.products.dto.ProductDto;
 import com.example.nadahassanplatform.products.model.Product;
+import com.example.nadahassanplatform.products.util.CategoryCodeMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class ProductMapper {
                 .primaryImage(createProductDto.getPrimaryImage())
                 .secondaryImages(createProductDto.getSecondaryImages())
                 .price(createProductDto.getPrice())
-                .productCategory(Product.Category.valueOf(createProductDto.getCategory()))
+                .productCategory(Product.Category.valueOf(CategoryCodeMapper.getCategory(createProductDto.getCategoryCode()).getValue()))
                 .colors(createProductDto.getColors()).build();
     }
 
