@@ -1,15 +1,14 @@
+---
 openapi: 3.0.1
-x-stoplight:
-  id: 3anzovky719b9
 info:
   title: Nada Hassan Fashion Platform
   description: Fashion Platform
   version: '1.0'
 servers:
-  - url: 'http://localhost:8080'
+  - url: http://localhost:8080
     description: Generated server url
 paths:
-  /products:
+  "/products":
     get:
       tags:
         - products-controller
@@ -39,23 +38,41 @@ paths:
             type: string
       responses:
         '200':
-          description: Products pages are fetched successfully
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProductResponsePageDTO'
+                "$ref": "#/components/schemas/ProductResponsePageDTO"
         '400':
-          description: Bad Request when the sent parameters have invalid value
+          description: Bad Request
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
     post:
       tags:
         - products-controller
@@ -64,7 +81,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateProductDto'
+              "$ref": "#/components/schemas/CreateProductDto"
         required: true
       responses:
         '200':
@@ -72,33 +89,33 @@ paths:
         '400':
           description: Bad Request
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
         '404':
           description: Not Found
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
         '405':
           description: Method Not Allowed
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
         '415':
           description: Unsupported Media Type
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
     patch:
       tags:
         - products-controller
@@ -107,30 +124,129 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateProductDto'
+              "$ref": "#/components/schemas/UpdateProductDto"
         required: true
       responses:
-        '201':
-          description: No content, product edited successfully
+        '200':
+          description: OK
         '400':
-          description: Bad Request, when the sent object has invalid value
+          description: Bad Request
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
         '404':
-          description: Not Found, when the product to be edited is not exist
+          description: Not Found
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-  '/products/{id}':
+                "$ref": "#/components/schemas/ApiErrorResponse"
+  "/orders":
+    get:
+      tags:
+        - order-controller
+      operationId: getAllOrders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/OrderDto"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+    post:
+      tags:
+        - order-controller
+      operationId: addOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CreateOrderDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+  "/products/{id}":
     get:
       tags:
         - products-controller
@@ -144,23 +260,41 @@ paths:
             format: uuid
       responses:
         '200':
-          description: Product recieved successfully
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProductDto'
-        '404':
-          description: Not found if the specified id not linked with any product
+                "$ref": "#/components/schemas/ProductDto"
+        '400':
+          description: Bad Request
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
     delete:
       tags:
         - products-controller
@@ -174,39 +308,190 @@ paths:
             format: uuid
       responses:
         '200':
-          description: OK, product deleted successfully
-        '404':
-          description: Not Found, the product to be deleted is not exist
+          description: OK
+        '400':
+          description: Bad Request
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-  /orders:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+  "/products/category/{id}":
     get:
       tags:
-        - order-controller
-      operationId: getAll
+        - products-controller
+      operationId: getProductsByCategoryId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
-          description: OK, all orders are fetched successfully
+          description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Order'
+                  "$ref": "#/components/schemas/ProductDto"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                "$ref": "#/components/schemas/ApiErrorResponse"
+  "/products/categories":
+    get:
+      tags:
+        - products-controller
+      operationId: getAllProductsCategories
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  enum:
+                    - SKIRTS
+                    - PANTS
+                    - DRESSES
+                    - JACKETS
+                    - SWEATSHIRTS
+                    - TOPS
+                    - SETS
+                    - OTHERS
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+  "/orders/{id}":
+    get:
+      tags:
+        - order-controller
+      operationId: getOrderByID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/OrderDto"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiErrorResponse"
 components:
   schemas:
     ApiErrorResponse:
@@ -216,11 +501,12 @@ components:
           type: string
     CreateProductDto:
       required:
-        - category
+        - categoryCode
         - colors
         - description
         - price
         - primaryImage
+        - quantity
         - shortDescription
       type: object
       properties:
@@ -233,16 +519,62 @@ components:
         price:
           type: number
           format: double
-        secondaryImages:
-          type: array
-          items:
-            type: string
+        quantity:
+          type: integer
+          format: int32
+        categoryCode:
+          type: integer
+          format: int32
         colors:
           type: array
           items:
             type: string
-        category:
+        secondaryImages:
+          type: array
+          items:
+            type: string
+    CreateOrderDto:
+      required:
+        - address
+        - email
+        - firstName
+        - government
+        - lastName
+        - mobileNumber
+        - orderItems
+      type: object
+      properties:
+        email:
           type: string
+        mobileNumber:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        government:
+          type: string
+        address:
+          type: string
+        orderItems:
+          type: array
+          items:
+            "$ref": "#/components/schemas/OrderItemDto"
+        city:
+          type: string
+    OrderItemDto:
+      required:
+        - productId
+        - quantity
+      type: object
+      properties:
+        quantity:
+          minimum: 1
+          type: integer
+          format: int32
+        productId:
+          type: string
+          format: uuid
     UpdateProductDto:
       required:
         - id
@@ -290,12 +622,12 @@ components:
           type: integer
           format: int32
         pageable:
-          $ref: '#/components/schemas/PageableDTO'
+          "$ref": "#/components/schemas/PageableDTO"
         size:
           type: integer
           format: int32
         sort:
-          $ref: '#/components/schemas/SortDTO'
+          "$ref": "#/components/schemas/SortDTO"
         totalElements:
           type: integer
           format: int64
@@ -317,7 +649,7 @@ components:
         paged:
           type: boolean
         sort:
-          $ref: '#/components/schemas/SortDTO'
+          "$ref": "#/components/schemas/SortDTO"
         unPaged:
           type: boolean
     ProductDto:
@@ -337,6 +669,9 @@ components:
         price:
           type: number
           format: double
+        quantity:
+          type: integer
+          format: int32
         secondaryImages:
           type: array
           items:
@@ -351,9 +686,9 @@ components:
         content:
           type: array
           items:
-            $ref: '#/components/schemas/ProductDto'
+            "$ref": "#/components/schemas/ProductDto"
         page:
-          $ref: '#/components/schemas/PageDTO'
+          "$ref": "#/components/schemas/PageDTO"
     SortDTO:
       type: object
       properties:
@@ -363,7 +698,7 @@ components:
           type: boolean
         unsorted:
           type: boolean
-    Order:
+    OrderDto:
       type: object
       properties:
         id:
@@ -371,20 +706,45 @@ components:
           format: uuid
         orderSubmissionId:
           type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        city:
+          type: string
+        government:
+          type: string
         address:
           type: string
-        customerMobile:
+        mobileNumber:
           type: string
         orderItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
+          type: object
+          additionalProperties:
+            "$ref": "#/components/schemas/OrderProduct"
         createdDate:
           type: string
           format: date-time
         updatedDate:
           type: string
           format: date-time
+        shippingFees:
+          type: number
+          format: double
+        orderTotalAmount:
+          type: number
+          format: double
+    OrderProduct:
+      required:
+        - product
+        - quantity
+      type: object
+      properties:
+        quantity:
+          type: integer
+          format: int32
+        product:
+          "$ref": "#/components/schemas/Product"
     Product:
       type: object
       properties:
@@ -400,6 +760,9 @@ components:
         price:
           type: number
           format: double
+        quantity:
+          type: integer
+          format: int32
         secondaryImages:
           type: array
           items:
@@ -411,10 +774,13 @@ components:
         productCategory:
           type: string
           enum:
-            - PULLOVER
-            - JACKET
+            - SKIRTS
             - PANTS
-            - CHEMISE
+            - DRESSES
+            - JACKETS
+            - SWEATSHIRTS
+            - TOPS
+            - SETS
             - OTHERS
         createdDate:
           type: string
