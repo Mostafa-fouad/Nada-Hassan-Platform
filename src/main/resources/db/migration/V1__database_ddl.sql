@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS public.orders
     order_items jsonb default null::jsonb not null,
     order_total_amount NUMERIC(6, 2) not null,
     shipping_fees NUMERIC(6, 2) not null,
+    order_status character varying(255) COLLATE pg_catalog."default" not null,
     created_date timestamp without time zone not null,
     updated_date timestamp without time zone not null,
     CONSTRAINT order_pkey PRIMARY KEY (id)

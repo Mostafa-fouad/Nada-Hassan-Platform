@@ -64,10 +64,10 @@ public class ProductsController {
 
     //TODO should be refactored
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductResponsePageDTO> getAllProductsPage(final Integer pageNumber,
-                                                                     final Integer size,
-                                                                     final String orderBy,
-                                                                     final String direction) {
+    public ResponseEntity<ProductResponsePageDTO> getProductsPage(final Integer pageNumber,
+                                                                  final Integer size,
+                                                                  final String orderBy,
+                                                                  final String direction) {
 
         var pageable = PaginationUtils.buildPageable(pageNumber, size, orderBy, direction);
 
