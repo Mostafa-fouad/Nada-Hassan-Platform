@@ -2,6 +2,7 @@ package com.example.nadahassanplatform.orders.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -12,8 +13,9 @@ import java.util.UUID;
 @NoArgsConstructor
 public class OrderItemDto {
 
+    @Min(1)
     @NotNull
-    private int quantity;
+    private Integer quantity;
     @NotNull
     private UUID productId;
 }

@@ -3,27 +3,30 @@ package com.example.nadahassanplatform.orders.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 @Setter
 @Getter
 public class CreateOrderDto {
 
-    @NotNull
+    @NotBlank
     private String email;
-    @NotNull
+    @NotBlank
     private String mobileNumber;
-    @NotNull
+    @NotBlank
     private String firstName;
-    @NotNull
+    @NotBlank
     private String lastName;
-    @NotNull
-    private String city;
-    @NotNull
+    @NotBlank
+    private String government;
+    @NotBlank
     private String address;
-    @NotNull
     @NotEmpty
+    @Valid
     private List<OrderItemDto> orderItems;
+    private String city;
 }

@@ -4,7 +4,7 @@ import com.example.nadahassanplatform.orders.dto.CreateOrderDto;
 import com.example.nadahassanplatform.core.exception.NotFoundException;
 import com.example.nadahassanplatform.orders.dto.OrderDto;
 import com.example.nadahassanplatform.orders.mapper.OrderMapper;
-import com.example.nadahassanplatform.orders.model.Order;
+import com.example.nadahassanplatform.orders.model.Orders;
 import com.example.nadahassanplatform.orders.repository.OrderRepository;
 import com.example.nadahassanplatform.orders.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,15 +25,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> getAllOrders() {
         return orderRepository.findAll().stream()
-                .map(order -> modelMapper.map(order, OrderDto.class)).toList();
+                .map(orders -> modelMapper.map(orders, OrderDto.class)).toList();
     }
 
     @Override
     public OrderDto getOrderByID(UUID orderID) {
-        final Order order = orderRepository.findById(orderID)
+        final Orders orders = orderRepository.findById(orderID)
                 .orElseThrow(() -> new NotFoundException(String.format("Order with id %s is not found", orderID)));
 
-        return modelMapper.map(order, OrderDto.class);
+        return modelMapper.map(orders, OrderDto.class);
     }
 
     @Override

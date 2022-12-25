@@ -4,6 +4,8 @@ import com.example.nadahassanplatform.products.model.Product;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
+
 @Component
 @Getter
 @Setter
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class OrderProduct {
 
-    private int quantity;
+    @NotNull
+    private Integer quantity;
+    @NotNull
     private Product product;
 }

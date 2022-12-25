@@ -11,8 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static com.example.nadahassanplatform.orders.controller.OrderController.ORDERS_ROOT_PATH;
@@ -39,7 +39,7 @@ public class OrderController {
         return new ResponseEntity<>(orderService.getOrderByID(id), HttpStatus.OK);
     }
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addOrder(@RequestBody CreateOrderDto createOrderDto)
+    public ResponseEntity<Void> addOrder(@RequestBody @Valid final CreateOrderDto createOrderDto)
     {
         orderService.addOrder(createOrderDto);
         return new ResponseEntity<>(HttpStatus.CREATED);

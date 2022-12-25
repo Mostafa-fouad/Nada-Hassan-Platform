@@ -45,7 +45,7 @@ public class GeneralExceptionHandler {
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler({HttpMessageNotReadableException.class})
   public ApiErrorResponse handleException(HttpMessageNotReadableException ex) {
-    return logAndRespond("Malformed request", ex);
+    return logAndRespond(String.format("Malformed request %s", ex.getCause().getCause().getMessage()), ex);
   }
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)

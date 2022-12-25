@@ -3,7 +3,7 @@ package com.example.nadahassanplatform.orders.mapper;
 import com.example.nadahassanplatform.core.exception.NotFoundException;
 import com.example.nadahassanplatform.orders.dto.CreateOrderDto;
 import com.example.nadahassanplatform.orders.dto.OrderItemDto;
-import com.example.nadahassanplatform.orders.model.Order;
+import com.example.nadahassanplatform.orders.model.Orders;
 import com.example.nadahassanplatform.orders.util.OrderProduct;
 import com.example.nadahassanplatform.products.model.Product;
 import com.example.nadahassanplatform.products.repository.ProductRepository;
@@ -19,17 +19,25 @@ import java.util.UUID;
 public class OrderMapper {
     private final ProductRepository productRepository;
 
-    public Order mapCreateOrderDtoToOrderModel(final CreateOrderDto createOrderDto) {
+    public Orders mapCreateOrderDtoToOrderModel(final CreateOrderDto createOrderDto) {
 
         final Map<UUID, OrderProduct> orderProductsMap = new HashMap<>();
 
         createOrderDto.getOrderItems().forEach(orderItemDto ->
                 orderProductsMap.put(orderItemDto.getProductId(), mapOrderItemDtoToOrderProduct(orderItemDto)));
 
-        return Order.builder()
+        //TODO total amount and shipping fees should be calculated and added to the Order model down here
+        return Orders.builder()
                 .address(createOrderDto.getAddress())
+                .city(createOrderDto.getCity())
+                .email(createOrderDto.getEmail())
+                .firstName(createOrderDto.getFirstName())
+                .lastName(createOrderDto.getLastName())
+                .government(createOrderDto.getGovernment())
                 .orderSubmissionId(generateSubmissionCode())
-                .customerMobile(createOrderDto.getMobileNumber())
+                .mobileNumber(createOrderDto.getMobileNumber())
+                .orderTotalAmount(180.5)
+                .shippingFees(40.0)
                 .orderItems(orderProductsMap).build();
     }
 
