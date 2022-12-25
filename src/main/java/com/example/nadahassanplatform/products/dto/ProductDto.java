@@ -1,8 +1,6 @@
 package com.example.nadahassanplatform.products.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -10,6 +8,8 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDto {
 
     private UUID id;

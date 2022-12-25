@@ -6,6 +6,9 @@ import com.example.nadahassanplatform.products.model.Product;
 import com.example.nadahassanplatform.products.util.CategoryCodeMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class ProductMapper {
 
@@ -31,5 +34,13 @@ public class ProductMapper {
                 .price(createProductDto.getPrice())
                 .productCategory(Product.Category.valueOf(CategoryCodeMapper.getCategory(createProductDto.getCategoryCode()).getValue()))
                 .colors(createProductDto.getColors()).build();
+    }
+
+    public List<ProductDto> mapListOfProductModelToListOfProductDto(final List<Product> products) {
+        final List<ProductDto> productDtos = new ArrayList<>();
+
+        products.forEach(product -> productDtos.add(mapProductModelToProductDto(product)));
+
+        return productDtos;
     }
 }

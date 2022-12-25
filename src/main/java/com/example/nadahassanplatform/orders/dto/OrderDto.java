@@ -1,9 +1,9 @@
 package com.example.nadahassanplatform.orders.dto;
 
-import com.example.nadahassanplatform.products.model.Product;
+import com.example.nadahassanplatform.orders.util.OrderProduct;
 import lombok.*;
 import java.time.Instant;
-import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Builder
@@ -17,7 +17,7 @@ public class OrderDto {
     private String orderSubmissionId;
     private String address;
     private String customerMobile;
-    private List<Product> orderItems;
+    private Map<UUID, OrderProduct> orderItems;
     private Instant createdDate;
     private Instant updatedDate;
 }
