@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -55,12 +56,13 @@ public class ProductsController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addProduct(@RequestBody final CreateProductDto createProductDto)
+    public ResponseEntity<Void> addProduct(@RequestBody @Valid final CreateProductDto createProductDto)
     {
         productService.addProduct(createProductDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    //TODO should be refactored
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductResponsePageDTO> getAllProductsPage(final Integer pageNumber,
                                                                      final Integer size,
@@ -73,7 +75,7 @@ public class ProductsController {
     }
 
     @PatchMapping
-    public ResponseEntity<Void> editProduct(@RequestBody final UpdateProductDto updateProductDto) {
+    public ResponseEntity<Void> editProduct(@RequestBody @Valid final UpdateProductDto updateProductDto) {
 
         productService.updateProduct(updateProductDto);
 

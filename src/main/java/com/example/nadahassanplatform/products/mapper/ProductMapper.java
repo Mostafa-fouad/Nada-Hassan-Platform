@@ -18,6 +18,8 @@ public class ProductMapper {
                 .id(product.getId())
                 .description(product.getDescription())
                 .shortDescription(product.getShortDescription())
+                .price(product.getPrice())
+                .quantity(product.getQuantity())
                 .primaryImage(product.getPrimaryImage())
                 .secondaryImages(product.getSecondaryImages())
                 .colors(product.getColors())
@@ -32,6 +34,7 @@ public class ProductMapper {
                 .primaryImage(createProductDto.getPrimaryImage())
                 .secondaryImages(createProductDto.getSecondaryImages())
                 .price(createProductDto.getPrice())
+                .quantity(createProductDto.getQuantity())
                 .productCategory(Product.Category.valueOf(CategoryCodeMapper.getCategory(createProductDto.getCategoryCode()).getValue()))
                 .colors(createProductDto.getColors()).build();
     }

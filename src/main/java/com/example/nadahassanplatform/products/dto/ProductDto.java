@@ -18,6 +18,7 @@ public class ProductDto {
     private String primaryImage;
     private String category;
     private Double price;
+    private Integer quantity;
     private List<String> secondaryImages;
     private List<String> colors;
 
