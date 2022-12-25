@@ -1,6 +1,7 @@
 package com.example.nadahassanplatform.orders.model;
 
 import com.example.nadahassanplatform.orders.util.OrderProduct;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,6 +11,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -35,6 +38,7 @@ public class Orders {
     private static final String GOVERNMENT_COLUMN_NAME = "government";
     private static final String SHIPPING_FEES_COLUMN_NAME = "shipping_fees";
     private static final String ORDER_TOTAL_AMOUNT_COLUMN_NAME = "order_total_amount";
+    private static final String ORDER_STATUS_COLUMN_NAME = "order_status";
     private static final String CREATION_DATE_COLUMN_NAME = "created_date";
     private static final String UPDATED_DATE_COLUMN_NAME = "updated_date";
 
@@ -79,6 +83,10 @@ public class Orders {
     @Column(name = ORDER_TOTAL_AMOUNT_COLUMN_NAME, nullable = false)
     private Double orderTotalAmount;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = ORDER_STATUS_COLUMN_NAME, nullable = false)
+    private Status orderStatus;
+
     @CreationTimestamp
     @Column(name = CREATION_DATE_COLUMN_NAME, nullable = false, updatable = false)
     private Instant createdDate;
@@ -88,13 +96,44 @@ public class Orders {
     private Instant updatedDate;
 
     @PrePersist
-    public void prePersistCreatedDate() {
+    private void prePersist() {
+        this.orderStatus = Status.AWAITING_SHIPMENT;
         this.createdDate = Instant.now();
         this.updatedDate = Instant.now();
     }
 
     @PreUpdate
-    public void prePersistUpdatedDate() {
+    private void prePersistUpdatedDate() {
         this.updatedDate = Instant.now();
+    }
+
+    public enum Status {
+        AWAITING_SHIPMENT("AWAITING_SHIPMENT"), //default order status once submitted
+        SHIPPED("SHIPPED"),
+        OUT_FOR_DELIVERY("OUT_FOR_DELIVERY"),
+        ARRIVED("ARRIVED"),
+        CANCELLED("CANCELLED"),
+        DECLINED("DECLINED");
+
+        private final String value;
+
+        Status(String value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static List<Status> getAllStatus() {
+
+            return Arrays.stream(Status.values()).toList();
+        }
     }
 }

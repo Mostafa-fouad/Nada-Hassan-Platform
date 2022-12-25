@@ -5,6 +5,7 @@ import com.example.nadahassanplatform.core.exception.NotFoundException;
 import com.example.nadahassanplatform.orders.dto.OrderDto;
 import com.example.nadahassanplatform.orders.mapper.OrderMapper;
 import com.example.nadahassanplatform.orders.model.Orders;
+import com.example.nadahassanplatform.orders.model.Orders.Status;
 import com.example.nadahassanplatform.orders.repository.OrderRepository;
 import com.example.nadahassanplatform.orders.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,18 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDto> getAllOrders() {
         return orderRepository.findAll().stream()
                 .map(orders -> modelMapper.map(orders, OrderDto.class)).toList();
+    }
+
+    @Override
+    public List<OrderDto> getAllOrdersByStatus(final String status) {
+        return orderRepository.findOrdersByOrderStatusIs(Status.valueOf(status)).stream()
+                .map(orders -> modelMapper.map(orders, OrderDto.class))
+                .toList();
+    }
+
+    @Override
+    public List<Status> getAllStatus() {
+        return Status.getAllStatus();
     }
 
     @Override

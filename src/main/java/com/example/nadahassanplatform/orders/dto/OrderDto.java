@@ -1,5 +1,6 @@
 package com.example.nadahassanplatform.orders.dto;
 
+import com.example.nadahassanplatform.orders.model.Orders.Status;
 import com.example.nadahassanplatform.orders.util.OrderProduct;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
@@ -29,4 +30,5 @@ public class OrderDto {
     private Instant updatedDate;
     private double shippingFees;
     private double orderTotalAmount;
+    private Status orderStatus;
 }
