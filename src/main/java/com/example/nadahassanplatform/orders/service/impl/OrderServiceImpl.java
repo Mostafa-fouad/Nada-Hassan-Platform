@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addOrder(CreateOrderDto createOrderDto) {
-        orderRepository.save(orderMapper.mapCreateOrderDtoToOrderModel(createOrderDto));
+    public String addOrder(CreateOrderDto createOrderDto) {
+        return orderRepository.save(orderMapper.mapCreateOrderDtoToOrderModel(createOrderDto)).getOrderSubmissionId();
     }
 }
