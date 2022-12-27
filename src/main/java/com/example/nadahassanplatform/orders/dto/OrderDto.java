@@ -14,7 +14,6 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Validated
 public class OrderDto {
 
     private UUID id;

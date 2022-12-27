@@ -22,8 +22,8 @@ import static com.example.nadahassanplatform.orders.controller.OrderController.O
 @CrossOrigin
 public class OrderController {
     static final String ORDERS_ROOT_PATH = "/orders";
-    static final String ORDERS_BY_STATUS_PATH = "/status";
-    static final String ORDERS_STATUSES_PATH = "/statuses";
+    private static final String ORDERS_BY_STATUS_PATH = "/status";
+    private static final String ORDERS_STATUSES_PATH = "/statuses";
     private static final String ID_PATH = "/{id}";
 
     private final OrderService orderService;
