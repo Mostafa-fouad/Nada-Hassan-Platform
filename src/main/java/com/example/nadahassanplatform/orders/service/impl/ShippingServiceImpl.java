@@ -1,6 +1,7 @@
 package com.example.nadahassanplatform.orders.service.impl;
 
 import com.example.nadahassanplatform.orders.dto.ShippingDto;
+import com.example.nadahassanplatform.orders.model.Shipping;
 import com.example.nadahassanplatform.orders.repository.ShippingRepository;
 import com.example.nadahassanplatform.orders.service.ShippingService;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,15 @@ public class ShippingServiceImpl implements ShippingService {
         return shippingRepository.findAll().stream()
                 .map(shipping -> modelMapper.map(shipping, ShippingDto.class))
                 .toList();
+    }
+
+    @Override
+    public List<String> getAllShippingGovernments() {
+        return shippingRepository.getAllShippingGovernments();
+    }
+
+    @Override
+    public void addShipping(final ShippingDto shippingDto) {
+        shippingRepository.save(modelMapper.map(shippingDto, Shipping.class));
     }
 }

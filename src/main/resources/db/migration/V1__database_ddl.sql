@@ -55,33 +55,35 @@ CREATE TABLE IF NOT EXISTS public.internal_user
 
 CREATE TABLE IF NOT EXISTS public.shipping
 (
-    id int NOT NULL,
+    id SERIAL NOT NULL,
     government_name character varying(255) COLLATE pg_catalog."default" not null,
     fees float8 not null,
-    CONSTRAINT government_shipping_pkey PRIMARY KEY (government_name)
+    CONSTRAINT shipping_id_pkey PRIMARY KEY (id),
+    CONSTRAINT government_shipping_unique UNIQUE (government_name)
+
 )
     TABLESPACE pg_default;
 
 INSERT INTO shipping
-(id, government_name, fees)
+(government_name, fees)
 VALUES
-    (1, 'القاهرة', 50),
-    (2, 'الجيزة', 50),
-    (3, 'الأسكندرية', 60),
-    (4, 'الدلتا', 60),
-    (5, 'الشرقية', 60),
-    (6, 'القناة', 60),
-    (7, 'البحيرة', 60),
-    (8, 'بني سويف', 65),
-    (9, 'الفيوم', 65),
-    (10, 'سوهاج', 85),
-    (11, 'الأقصر', 85),
-    (12, 'قنا', 85),
-    (13, 'أسوان', 85),
-    (14, 'المنيا', 85),
-    (15, 'أسيوط', 85),
-    (16, 'الغردقة', 85),
-    (17, 'مرسى مطروح', 85),
-    (18, 'الساحل الشمالي', 85),
-    (19, 'العين السخنة', 85),
-    (20, 'الوادي الجديد', 100);
+    ('القاهرة', 50),
+    ('الجيزة', 50),
+    ('الأسكندرية', 60),
+    ('الدلتا', 60),
+    ('الشرقية', 60),
+    ('القناة', 60),
+    ('البحيرة', 60),
+    ('بني سويف', 65),
+    ('الفيوم', 65),
+    ('سوهاج', 85),
+    ('الأقصر', 85),
+    ('قنا', 85),
+    ('أسوان', 85),
+    ('المنيا', 85),
+    ('أسيوط', 85),
+    ('الغردقة', 85),
+    ('مرسى مطروح', 85),
+    ('الساحل الشمالي', 85),
+    ('العين السخنة', 85),
+    ('الوادي الجديد', 100);

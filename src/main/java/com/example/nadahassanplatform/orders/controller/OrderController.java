@@ -51,8 +51,8 @@ public class OrderController {
         return new ResponseEntity<>(statusList, HttpStatus.OK);
     }
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addOrder(@RequestBody @Valid final CreateOrderDto createOrderDto) {
-        orderService.addOrder(createOrderDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<String> addOrder(@RequestBody @Valid final CreateOrderDto createOrderDto) {
+        final String orderSubmissionId = orderService.addOrder(createOrderDto);
+        return new ResponseEntity<>(orderSubmissionId, HttpStatus.CREATED);
     }
 }

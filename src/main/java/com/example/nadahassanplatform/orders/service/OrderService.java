@@ -13,5 +13,5 @@ public interface OrderService {
     List<OrderDto> getAllOrdersByStatus(String status);
     List<Status> getAllStatus();
     OrderDto getOrderByID(UUID orderID);
-    void addOrder(CreateOrderDto createOrderDto);
+    String addOrder(CreateOrderDto createOrderDto);
 }

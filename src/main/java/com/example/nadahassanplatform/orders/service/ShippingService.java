@@ -7,4 +7,7 @@ import java.util.List;
 public interface ShippingService {
 
     List<ShippingDto> getAllShippings();
+    List<String> getAllShippingGovernments();
+
+    void addShipping(ShippingDto shippingDto);
 }
