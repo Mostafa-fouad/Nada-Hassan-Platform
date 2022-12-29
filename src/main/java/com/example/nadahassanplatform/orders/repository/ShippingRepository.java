@@ -14,4 +14,5 @@ public interface ShippingRepository extends JpaRepository<Shipping, Long> {
     List<String> getAllShippingGovernments();
 
     Optional<Shipping> findByGovernmentName(String governmentName);
+    void deleteByGovernmentName(String governmentName);
 }

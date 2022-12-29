@@ -10,4 +10,5 @@ public interface ShippingService {
     List<String> getAllShippingGovernments();
     void addShipping(ShippingDto shippingDto);
     void editShippingFees(ShippingDto shippingDto);
+    void deleteGovernment(String governmentName);
 }
