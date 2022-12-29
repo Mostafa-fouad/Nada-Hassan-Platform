@@ -34,15 +34,21 @@ public class ShippingController {
         return new ResponseEntity<>(governments, HttpStatus.OK);
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     public ResponseEntity<Void> addShipping(@RequestBody final ShippingDto shippingDto) {
         shippingService.addShipping(shippingDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PatchMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping
     public ResponseEntity<Void> editShippingFees(@RequestBody final ShippingDto shippingDto) {
         shippingService.editShippingFees(shippingDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteGovernment(@RequestParam final String governmentName) {
+        shippingService.deleteGovernment(governmentName);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -47,4 +47,10 @@ public class ShippingServiceImpl implements ShippingService {
 
         shippingRepository.save(shipping);
     }
+
+    @Override
+    @Transactional
+    public void deleteGovernment(String governmentName) {
+        shippingRepository.deleteByGovernmentName(governmentName);
+    }
 }
