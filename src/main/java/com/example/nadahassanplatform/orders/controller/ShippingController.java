@@ -39,4 +39,10 @@ public class ShippingController {
         shippingService.addShipping(shippingDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @PatchMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> editShippingFees(@RequestBody final ShippingDto shippingDto) {
+        shippingService.editShippingFees(shippingDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

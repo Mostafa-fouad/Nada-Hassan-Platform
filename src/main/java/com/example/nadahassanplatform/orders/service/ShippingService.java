@@ -8,6 +8,6 @@ public interface ShippingService {
 
     List<ShippingDto> getAllShippings();
     List<String> getAllShippingGovernments();
-
     void addShipping(ShippingDto shippingDto);
+    void editShippingFees(ShippingDto shippingDto);
 }
