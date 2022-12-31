@@ -1,26 +1,32 @@
 package com.example.nadahassanplatform.orders.dto;
 
-import com.example.nadahassanplatform.products.model.Product;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.validation.constraints.NotNull;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
-import java.util.UUID;
 
 
 @Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class CreateOrderDto {
 
-    @NotNull
-    private String address;
-    @NotNull
+    @NotBlank
+    private String email;
+    @NotBlank
     private String mobileNumber;
-    private List<UUID> orderItems;
-
+    @NotBlank
+    private String firstName;
+    @NotBlank
+    private String lastName;
+    @NotBlank
+    private String government;
+    @NotBlank
+    private String address;
+    @NotEmpty
+    @Valid
+    private List<OrderItemDto> orderItems;
+    private String city;
 }

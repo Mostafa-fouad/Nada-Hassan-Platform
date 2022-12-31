@@ -7,8 +7,10 @@ import com.example.nadahassanplatform.products.dto.ProductResponsePageDTO;
 import com.example.nadahassanplatform.products.dto.UpdateProductDto;
 import com.example.nadahassanplatform.products.mapper.ProductMapper;
 import com.example.nadahassanplatform.products.model.Product;
+import com.example.nadahassanplatform.products.model.Product.Category;
 import com.example.nadahassanplatform.products.repository.ProductRepository;
 import com.example.nadahassanplatform.products.service.ProductService;
+import com.example.nadahassanplatform.products.util.CategoryCodeMapper;
 import com.example.nadahassanplatform.utils.PaginationUtils;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,6 +22,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+import static com.example.nadahassanplatform.products.util.CategoryCodeMapper.getAllCategories;
 
 @CacheConfig(cacheNames = {"products-cache"})
 @Service
@@ -37,6 +41,20 @@ public class ProductsServiceImpl implements ProductService {
                 productRepository.findById(id).orElseThrow(
                         () -> new NotFoundException (String.format("Product with id %s is not found", id)))
         );
+    }
+
+    @Override
+    public List<ProductDto> getProductsByCategory(final Integer categoryId) {
+
+        return productRepository.findAllByProductCategory(CategoryCodeMapper.getCategory(categoryId))
+                .stream()
+                .map(productMapper::mapProductModelToProductDto)
+                .toList();
+    }
+
+    @Override
+    public List<Category> getAllProductsCategories() {
+        return getAllCategories();
     }
 
     @Override

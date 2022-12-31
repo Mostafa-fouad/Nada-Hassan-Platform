@@ -1,6 +1,7 @@
 package com.example.nadahassanplatform.products.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import lombok.Builder;
@@ -22,8 +23,11 @@ public class CreateProductDto {
     @NotNull
     private Double price;
     @NotNull
-    private String category;
+    private Integer quantity;
     @NotNull
+    private Integer categoryCode;
+    @NotNull
+    @NotEmpty
     private List<String> colors;
     private List<String> secondaryImages;
 
