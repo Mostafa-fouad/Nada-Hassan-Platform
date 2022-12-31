@@ -18,9 +18,9 @@ import static com.example.nadahassanplatform.orders.controller.ShippingControlle
 @CrossOrigin
 public class ShippingController {
 
+    private static final String SHIPPING_GOVERNMENTS_ROOT_PATH = "/governments";
     private final ShippingService shippingService;
     static final String SHIPPING_ROOT_PATH = "/shipping";
-    static final String SHIPPING_GOVERNMENTS_ROOT_PATH = "/governments";
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ShippingDto>> getAllShippings() {

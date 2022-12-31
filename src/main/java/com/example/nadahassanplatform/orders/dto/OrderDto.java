@@ -1,12 +1,10 @@
 package com.example.nadahassanplatform.orders.dto;
 
 import com.example.nadahassanplatform.orders.model.Orders.Status;
-import com.example.nadahassanplatform.orders.util.OrderProduct;
 import lombok.*;
-import org.springframework.validation.annotation.Validated;
 
 import java.time.Instant;
-import java.util.Map;
+import java.util.List;
 import java.util.UUID;
 
 @Builder
@@ -16,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class OrderDto {
 
-    private UUID id;
+    private UUID orderId;
     private String orderSubmissionId;
     private String firstName;
     private String lastName;
@@ -24,7 +22,7 @@ public class OrderDto {
     private String government;
     private String address;
     private String mobileNumber;
-    private Map<UUID, OrderProduct> orderItems;
+    private List<ProductItemDto> orderItems;
     private Instant createdDate;
     private Instant updatedDate;
     private double shippingFees;

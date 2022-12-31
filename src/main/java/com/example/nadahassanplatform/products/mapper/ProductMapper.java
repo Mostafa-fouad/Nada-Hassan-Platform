@@ -19,7 +19,6 @@ public class ProductMapper {
                 .description(product.getDescription())
                 .shortDescription(product.getShortDescription())
                 .price(product.getPrice())
-                .quantity(product.getQuantity())
                 .primaryImage(product.getPrimaryImage())
                 .secondaryImages(product.getSecondaryImages())
                 .colors(product.getColors())
