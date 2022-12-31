@@ -21,18 +21,17 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private  final OrderMapper orderMapper;
-    private final ModelMapper modelMapper;
 
     @Override
     public List<OrderDto> getAllOrders() {
         return orderRepository.findAll().stream()
-                .map(orders -> modelMapper.map(orders, OrderDto.class)).toList();
+                .map(orderMapper::getOrderDto).toList();
     }
 
     @Override
     public List<OrderDto> getAllOrdersByStatus(final String status) {
         return orderRepository.findOrdersByOrderStatusIs(Status.valueOf(status)).stream()
-                .map(orders -> modelMapper.map(orders, OrderDto.class))
+                .map(orderMapper::getOrderDto)
                 .toList();
     }
 
@@ -43,10 +42,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto getOrderByID(UUID orderID) {
-        final Orders orders = orderRepository.findById(orderID)
+        final Orders order = orderRepository.findById(orderID)
                 .orElseThrow(() -> new NotFoundException(String.format("Order with id %s is not found", orderID)));
 
-        return modelMapper.map(orders, OrderDto.class);
+        return orderMapper.getOrderDto(order);
     }
 
     @Override

@@ -60,7 +60,7 @@ public class Orders {
 
     @Type(type = JSON_B_TYPE)
     @Column(name = ORDER_ITEMS_COLUMN_NAME, nullable = false)
-    private Map<UUID, OrderProduct> orderItems;
+    private Map<UUID, Integer> orderItems;
 
     @Column(name = EMAIL_COLUMN_NAME, nullable = false)
     private String email;

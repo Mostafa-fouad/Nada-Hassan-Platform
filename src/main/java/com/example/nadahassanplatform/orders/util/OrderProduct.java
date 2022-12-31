@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Component
 @Getter
@@ -17,5 +18,5 @@ public class OrderProduct {
     @NotNull
     private Integer quantity;
     @NotNull
-    private Product product;
+    private UUID productId;
 }
