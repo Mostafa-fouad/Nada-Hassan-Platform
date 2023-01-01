@@ -1,6 +1,7 @@
 package com.example.nadahassanplatform.orders.service;
 
 
+import com.example.nadahassanplatform.orders.dto.AddProductToOrderDto;
 import com.example.nadahassanplatform.orders.dto.CreateOrderDto;
 import com.example.nadahassanplatform.orders.dto.OrderDto;
 import com.example.nadahassanplatform.orders.model.Orders.Status;
@@ -15,4 +16,7 @@ public interface OrderService {
     OrderDto getOrderByID(UUID orderID);
     String addOrder(CreateOrderDto createOrderDto);
     void updateExistingOrder(OrderDto updatedOrder);
+
+
+    void addProductToExistingOrder(UUID id, AddProductToOrderDto addProductToOrderDto);
 }

@@ -11,4 +11,6 @@ public interface ShippingService {
     void addShipping(ShippingDto shippingDto);
     void editShippingFees(ShippingDto shippingDto);
     void deleteGovernment(String governmentName);
+
+    Double getFeesByGovernment(String governmentName);
 }
