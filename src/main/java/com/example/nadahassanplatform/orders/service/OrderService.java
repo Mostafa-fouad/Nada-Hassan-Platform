@@ -14,4 +14,5 @@ public interface OrderService {
     List<Status> getAllStatus();
     OrderDto getOrderByID(UUID orderID);
     String addOrder(CreateOrderDto createOrderDto);
+    void updateExistingOrder(OrderDto updatedOrder);
 }

@@ -8,12 +8,12 @@ import com.example.nadahassanplatform.orders.model.Orders;
 import com.example.nadahassanplatform.orders.model.Orders.Status;
 import com.example.nadahassanplatform.orders.repository.OrderRepository;
 import com.example.nadahassanplatform.orders.service.OrderService;
+import com.example.nadahassanplatform.products.model.Product;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -51,5 +51,23 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String addOrder(CreateOrderDto createOrderDto) {
         return orderRepository.save(orderMapper.mapCreateOrderDtoToOrderModel(createOrderDto)).getOrderSubmissionId();
+    }
+
+    @Override
+    public void updateExistingOrder(OrderDto updatedOrder) {
+        var orderID = updatedOrder.getOrderId();
+        final Map<UUID, Integer> orderItemsMap = new HashMap<>();
+        final Orders order = orderRepository.findById(orderID)
+                .orElseThrow(() -> new NotFoundException(String.format("Order with id %s is not found", orderID)));
+
+        if(Objects.nonNull(updatedOrder.getAddress())) order.setAddress(updatedOrder.getAddress());
+        if(Objects.nonNull(updatedOrder.getMobileNumber())) order.setMobileNumber(updatedOrder.getMobileNumber());
+        if(Objects.nonNull(updatedOrder.getOrderItems()))
+        {
+            updatedOrder.getOrderItems().forEach(orderItem -> orderItemsMap.put(orderItem.getProductDto().getId(), orderItem.getQuantity()));
+            order.setOrderItems(orderItemsMap);
+        }
+
+        orderRepository.save(order);
     }
 }

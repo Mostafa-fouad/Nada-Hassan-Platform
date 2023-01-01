@@ -55,4 +55,10 @@ public class OrderController {
         final String orderSubmissionId = orderService.addOrder(createOrderDto);
         return new ResponseEntity<>(orderSubmissionId, HttpStatus.CREATED);
     }
+
+    @PatchMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateExistingOrder(@RequestBody OrderDto updatedOrder){
+        orderService.updateExistingOrder(updatedOrder);
+        return ResponseEntity.noContent().build();
+    }
 }
