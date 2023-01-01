@@ -13,8 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -56,16 +55,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void updateExistingOrder(OrderDto updatedOrder) {
-        var orderID = updatedOrder.getId();
-        final Order order = orderRepository.findById(orderID)
+        var orderID = updatedOrder.getOrderId();
+        final Map<UUID, Integer> orderItemsMap = new HashMap<>();
+        final Orders order = orderRepository.findById(orderID)
                 .orElseThrow(() -> new NotFoundException(String.format("Order with id %s is not found", orderID)));
-        var updatedAddress = updatedOrder.getAddress();
-        var updatedCustomerMobile = updatedOrder.getCustomerMobile();
-        var updatedOrderItems = updatedOrder.getOrderItems();
 
-        if(updatedAddress != null) order.setAddress(updatedAddress);
-        if(updatedCustomerMobile != null) order.setCustomerMobile(updatedCustomerMobile);
-        if(updatedOrderItems != null) order.setOrderItems(updatedOrderItems);
+        if(Objects.nonNull(updatedOrder.getAddress())) order.setAddress(updatedOrder.getAddress());
+        if(Objects.nonNull(updatedOrder.getMobileNumber())) order.setMobileNumber(updatedOrder.getMobileNumber());
+        if(Objects.nonNull(updatedOrder.getOrderItems()))
+        {
+            updatedOrder.getOrderItems().forEach(orderItem -> orderItemsMap.put(orderItem.getProductDto().getId(), orderItem.getQuantity()));
+            order.setOrderItems(orderItemsMap);
+        }
 
         orderRepository.save(order);
     }
