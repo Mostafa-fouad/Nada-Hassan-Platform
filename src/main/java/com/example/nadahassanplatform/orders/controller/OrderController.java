@@ -2,6 +2,7 @@ package com.example.nadahassanplatform.orders.controller;
 
 import com.example.nadahassanplatform.orders.dto.CreateOrderDto;
 import com.example.nadahassanplatform.orders.dto.OrderDto;
+import com.example.nadahassanplatform.orders.dto.OrderItemDto;
 import com.example.nadahassanplatform.orders.model.Orders;
 import com.example.nadahassanplatform.orders.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -61,4 +62,11 @@ public class OrderController {
         orderService.updateExistingOrder(updatedOrder);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deleteOrderItemFromExistingOrder(@RequestParam UUID orderID,@RequestBody OrderItemDto deletedItems){
+        orderService.deleteOrderItem(orderID ,deletedItems);
+        return ResponseEntity.noContent().build();
+    }
+
 }
