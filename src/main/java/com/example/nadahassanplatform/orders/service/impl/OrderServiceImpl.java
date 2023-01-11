@@ -1,5 +1,6 @@
 package com.example.nadahassanplatform.orders.service.impl;
 
+import com.example.nadahassanplatform.orders.dto.AddProductToOrderDto;
 import com.example.nadahassanplatform.orders.dto.CreateOrderDto;
 import com.example.nadahassanplatform.core.exception.NotFoundException;
 import com.example.nadahassanplatform.orders.dto.OrderDto;
@@ -9,17 +10,22 @@ import com.example.nadahassanplatform.orders.model.Orders.Status;
 import com.example.nadahassanplatform.orders.repository.OrderRepository;
 import com.example.nadahassanplatform.orders.service.OrderService;
 import com.example.nadahassanplatform.products.model.Product;
+import com.example.nadahassanplatform.orders.util.OrderProduct;
+import com.example.nadahassanplatform.products.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
     private  final OrderMapper orderMapper;
 
     @Override
@@ -70,4 +76,30 @@ public class OrderServiceImpl implements OrderService {
 
         orderRepository.save(order);
     }
+
+    @Override
+    public void addProductToExistingOrder(UUID id, AddProductToOrderDto addProductToOrderDto) {
+        Orders existingOrder = orderRepository.findById(id).get();
+        Map<UUID, Integer> existingOrderItems= existingOrder.getOrderItems();
+        if(existingOrderItems.containsKey(addProductToOrderDto.getOrderItemId())){
+
+            Integer currentQuantityOfProduct = existingOrderItems.get(addProductToOrderDto.getOrderItemId());
+            existingOrderItems.put(addProductToOrderDto.getOrderItemId(),
+                    currentQuantityOfProduct+ addProductToOrderDto.getQuantity());
+
+        }else {
+            Product productToBeAddedToExistingOrder = productRepository.findById(addProductToOrderDto.getOrderItemId()).get();
+            existingOrderItems.put(addProductToOrderDto.getOrderItemId()
+            ,addProductToOrderDto.getQuantity());
+
+
+
+        }
+        existingOrder.setOrderTotalAmount(existingOrder.getOrderTotalAmount()+
+                productRepository.findById(addProductToOrderDto.getOrderItemId()).get().getPrice());
+
+        orderRepository.save(existingOrder);
+    }
+
+
 }

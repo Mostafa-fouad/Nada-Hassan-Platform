@@ -53,4 +53,10 @@ public class ShippingServiceImpl implements ShippingService {
     public void deleteGovernment(String governmentName) {
         shippingRepository.deleteByGovernmentName(governmentName);
     }
+
+    @Override
+    public Double getFeesByGovernment(String governmentName) {
+        return shippingRepository.findByGovernmentName(governmentName).get().getFees();
+    }
+
 }

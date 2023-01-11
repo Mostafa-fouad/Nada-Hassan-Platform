@@ -2,8 +2,10 @@ package com.example.nadahassanplatform.orders.mapper;
 
 import com.example.nadahassanplatform.orders.dto.CreateOrderDto;
 import com.example.nadahassanplatform.orders.dto.OrderDto;
+import com.example.nadahassanplatform.orders.dto.OrderItemDto;
 import com.example.nadahassanplatform.orders.dto.ProductItemDto;
 import com.example.nadahassanplatform.orders.model.Orders;
+import com.example.nadahassanplatform.orders.service.ShippingService;
 import com.example.nadahassanplatform.products.dto.ProductDto;
 import com.example.nadahassanplatform.products.mapper.ProductMapper;
 import com.example.nadahassanplatform.products.repository.ProductRepository;
@@ -17,6 +19,7 @@ import java.util.*;
 public class OrderMapper {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final ShippingService shippingService;
 
     public OrderDto getOrderDto(final Orders order) {
 
@@ -66,13 +69,23 @@ public class OrderMapper {
                 .government(createOrderDto.getGovernment())
                 .orderSubmissionId(generateSubmissionCode())
                 .mobileNumber(createOrderDto.getMobileNumber())
-                .orderTotalAmount(180.5)
-                .shippingFees(40.0)
+                .orderTotalAmount(calculateTotalFees(createOrderDto.getOrderItems()))
+                .shippingFees(shippingService.getFeesByGovernment(createOrderDto.getGovernment()))
                 .orderItems(orderProductsMap).build();
     }
 
     private String generateSubmissionCode() {
 
         return String.valueOf(System.currentTimeMillis());
+    }
+
+    private Double calculateTotalFees(List<OrderItemDto> orderItems){
+        Double totalFees = 0.0;
+        for (OrderItemDto item : orderItems){
+
+            totalFees=totalFees+productRepository.findById(item.getProductId()).get().getPrice();
+        }
+        return totalFees;
+
     }
 }

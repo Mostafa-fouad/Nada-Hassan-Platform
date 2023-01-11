@@ -1,9 +1,12 @@
 package com.example.nadahassanplatform.orders.controller;
 
+import com.example.nadahassanplatform.orders.dto.AddProductToOrderDto;
+import com.example.nadahassanplatform.orders.dto.CreateOrderDto;
 import com.example.nadahassanplatform.orders.dto.CreateOrderDto;
 import com.example.nadahassanplatform.orders.dto.OrderDto;
 import com.example.nadahassanplatform.orders.model.Orders;
 import com.example.nadahassanplatform.orders.service.OrderService;
+import com.example.nadahassanplatform.products.dto.CreateProductDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static com.example.nadahassanplatform.orders.controller.OrderController.ORDERS_ROOT_PATH;
@@ -25,6 +29,7 @@ public class OrderController {
     private static final String ORDERS_BY_STATUS_PATH = "/status";
     private static final String ORDERS_STATUSES_PATH = "/statuses";
     private static final String ID_PATH = "/{id}";
+    private static final String ADD_PRODUCT_TO_EXISTING_ORDER_PATH = "/{id}";
 
     private final OrderService orderService;
 
@@ -61,4 +66,13 @@ public class OrderController {
         orderService.updateExistingOrder(updatedOrder);
         return ResponseEntity.noContent().build();
     }
-}
+
+
+    @PatchMapping(path = ADD_PRODUCT_TO_EXISTING_ORDER_PATH,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> addProductToExistingOrder(@PathVariable final UUID id,@Valid @RequestBody final AddProductToOrderDto addProductToOrderDto)
+    {
+        orderService.addProductToExistingOrder(id,addProductToOrderDto);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    }

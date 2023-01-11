@@ -51,4 +51,10 @@ public class ShippingController {
         shippingService.deleteGovernment(governmentName);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping
+    public ResponseEntity<Double> getFeesByGovernment(@RequestParam final String governmentName) {
+        return new ResponseEntity<>(shippingService.getFeesByGovernment(governmentName)
+                ,HttpStatus.OK);
+    }
 }
